@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import PokemonHomePage from "./Components/PokemonHomePageInfo";
 
 
 function App() {
@@ -15,7 +16,6 @@ function App() {
         axios.get(`https://pokeapi.co/api/v2/pokemon`)
             .then(response => {
                 setData([...response.data.results, ...data]);
-                console.log(data)
             })
             .catch(error => {
                 console.log(error);
@@ -23,26 +23,26 @@ function App() {
     }
 
     function consoleLog() {
-
+        console.log(data)
     }
 
 
-    function fetchImg(pokemonImgUrl) {
-        axios.get(`${pokemonImgUrl.url}`).then(resp => setImg(resp?.data?.sprites?.other['official-artwork']?.front_default))
+    function fetchImg(pokemonImgUrl = 'https://pokeapi.co/api/v2/pokemon/1') {
+        axios.get(`https://pokeapi.co/api/v2/pokemon/1`).then(resp => setImg(resp?.data?.sprites?.other['official-artwork']?.front_default))
     }
 
     if (!data) return <>Loading...</>
 
     return (
         <>
-            <button onClick={fetchImg}>Нажми меня</button>
+            <button onClick={consoleLog}>Нажми меня</button>
             <div className="ui four column relaxed grid">
                 {data.map((pokemon, i) => {
-                    const image = fetchImg(pokemon)
                     return (
-                        <div key={i} className="column">
-                            <img src={img}/>
-                        </div>
+                        <PokemonHomePage key={i}
+                                         img={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i + 1}.png`}
+                                         name={pokemon.name}>
+                        </PokemonHomePage>
                     )
                 })}
             </div>
