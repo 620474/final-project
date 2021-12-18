@@ -11,6 +11,7 @@ import {Context} from "./api/Context";
 
 function App() {
     const [data, setData] = useState([])
+    const [filter, setFilter] = useState([])
 
 
     useEffect(() => {
@@ -20,7 +21,7 @@ function App() {
                 let arr = []
                 response.data.results.map((pokemon, i) => {
                     arr.push({
-                        index:i,
+                        index: i,
                         name: pokemon.name,
                         url: pokemon.url,
                         catched: false,
@@ -37,16 +38,15 @@ function App() {
     return (
         <>
             <Context.Provider value={[data, setData]}>
-                <ResponsiveAppBar/>
+                <ResponsiveAppBar filter={filter} setFilter = {setFilter}/>
                 <Routes>
                     <Route
                         path="/"
-                        element={<AllPokemons/>}
+                        element={<AllPokemons filter={filter}/>}
                     />
-
                     <Route
                         path="/catchedpokemons"
-                        element={<CatchedPokemonPage pokemons={data}/>}
+                        element={<CatchedPokemonPage filter={filter}/>}
                     />
                     <Route
                         path='/pokemon/:id' element={<PokemonPage/>}/>
