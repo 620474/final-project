@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {Routes, Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import CatchedPokemonPage from "./Views/CatchedPokemonsPage/CatchedPokemonPage";
 import AllPokemons from './Views/MainPage/MainPage'
 import ResponsiveAppBar from "./Components/Header";
@@ -13,6 +13,9 @@ function App() {
     const [data, setData] = useState([])
     const [filter, setFilter] = useState([])
 
+    const localStorageCatched = (pokemon) =>{
+        return !!localStorage.getItem(pokemon.name);
+    }
 
     useEffect(() => {
         axios
@@ -24,7 +27,7 @@ function App() {
                         index: i,
                         name: pokemon.name,
                         url: pokemon.url,
-                        catched: false,
+                        catched: localStorageCatched(pokemon),
                         img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i + 1}.png`,
                         catchTime: ''
                     })
@@ -38,7 +41,7 @@ function App() {
     return (
         <>
             <Context.Provider value={[data, setData]}>
-                <ResponsiveAppBar filter={filter} setFilter = {setFilter}/>
+                <ResponsiveAppBar filter={filter} setFilter={setFilter}/>
                 <Routes>
                     <Route
                         path="/"

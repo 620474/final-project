@@ -14,18 +14,18 @@ const AllPokemons = ({filter}) => {
     const [data] = useContext(Context)
     const [filteredData, setFilteredData] = useState([])
 
+
     useEffect(() => {
         const array = []
         const filteredArray = []
         data.map(pokemon => pokemon.catched ? array.push(pokemon) : null)
-        array.map(pokemon=>pokemon.name.includes(filter)?filteredArray.push(pokemon) : null)
+        array.map(pokemon => pokemon.name.includes(filter) ? filteredArray.push(pokemon) : null)
         setFilteredData(filteredArray)
-    }, [filter])
+    }, [filter,data])
+
 
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage] = useState(12)
-
-
 
     const pages = []
     for (let i = 1; i < Math.ceil(filteredData.length / itemsPerPage); i++) {
@@ -43,7 +43,7 @@ const AllPokemons = ({filter}) => {
 
     if (filteredData.length === 0) return (
         <Alert variant="outlined" severity="info">
-            This is no catched pokemons!
+            There is no catched pokemons!
         </Alert>
     )
 

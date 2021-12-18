@@ -23,7 +23,7 @@ const AllPokemons = ({filter}) => {
         const array = []
         data.map(pokemon => pokemon.name.includes(filter) ? array.push(pokemon) : null)
         setFilteredData(array)
-    }, [filter])
+    }, [filter,data])
 
 
     const pages = []

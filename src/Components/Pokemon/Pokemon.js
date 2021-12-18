@@ -23,12 +23,14 @@ const Pokemon = ({pokemon}) => {
         setCatched(true)
         pokemon.catched = true
         pokemon.catchTime = getDate()
+        localStorage.setItem(pokemon.name, 'true')
     }
 
     const DissmissPokemon = (e) => {
         setCatched(false)
         pokemon.catched = false
         pokemon.catchTime = ''
+        localStorage.removeItem(pokemon.name)
     }
 
     return (
