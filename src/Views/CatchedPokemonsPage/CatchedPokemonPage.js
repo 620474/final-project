@@ -14,7 +14,6 @@ const AllPokemons = ({filter}) => {
     const [data] = useContext(Context)
     const [filteredData, setFilteredData] = useState([])
 
-
     useEffect(() => {
         const array = []
         const filteredArray = []

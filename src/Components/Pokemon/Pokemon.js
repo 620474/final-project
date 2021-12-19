@@ -26,7 +26,7 @@ const Pokemon = ({pokemon}) => {
         localStorage.setItem(pokemon.name, 'true')
     }
 
-    const DissmissPokemon = (e) => {
+    const DissmissPokemon = () => {
         setCatched(false)
         pokemon.catched = false
         pokemon.catchTime = ''

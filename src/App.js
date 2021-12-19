@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {Route, Routes} from "react-router-dom";
 import CatchedPokemonPage from "./Views/CatchedPokemonsPage/CatchedPokemonPage";
 import AllPokemons from './Views/MainPage/MainPage'
-import ResponsiveAppBar from "./Components/Header";
+import ResponsiveAppBar from "./Components/Header/Header";
 import PokemonPage from "./Views/PokemonPage";
 import {Page404} from "./Views/Page404";
 import axios from "axios";
@@ -31,7 +31,7 @@ function App() {
                         img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i + 1}.png`,
                         catchTime: ''
                     })
-                    return null
+                    return arr
                 })
                 setData(arr);
             })
